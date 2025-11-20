@@ -28,7 +28,6 @@ namespace Entities
             //Seed countires
             try
             {
-                
                 //string countiresJson = File.ReadAllText("countries.json");
                 //List<Country> countries = JsonSerializer.Deserialize<List<Country>>(countiresJson);
 
