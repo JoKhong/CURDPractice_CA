@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EB55805A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CURDPractice_CA.Core", "CURDPractice_CA.Core\CURDPractice_CA.Core.csproj", "{AC63AA10-2F1A-479E-A6E9-EA39D6C4E81B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CURDPractice_CA.Infrastructure", "CURDPractice_CA.Infrastructure\CURDPractice_CA.Infrastructure.csproj", "{A2CAAC87-0B37-4CCD-B9FA-1C9CD43688D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{AC63AA10-2F1A-479E-A6E9-EA39D6C4E81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC63AA10-2F1A-479E-A6E9-EA39D6C4E81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC63AA10-2F1A-479E-A6E9-EA39D6C4E81B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2CAAC87-0B37-4CCD-B9FA-1C9CD43688D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2CAAC87-0B37-4CCD-B9FA-1C9CD43688D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2CAAC87-0B37-4CCD-B9FA-1C9CD43688D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2CAAC87-0B37-4CCD-B9FA-1C9CD43688D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{350D3BB5-7CAA-44B6-8F9B-0296BEBA9F82} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{AC63AA10-2F1A-479E-A6E9-EA39D6C4E81B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A2CAAC87-0B37-4CCD-B9FA-1C9CD43688D6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3A9F332E-5D60-403C-AE59-5D23FD511809}
