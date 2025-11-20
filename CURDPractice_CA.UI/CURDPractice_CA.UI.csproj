@@ -25,4 +25,12 @@
     <ProjectReference Include="..\CURDPractice_CA.Infrastructure\CURDPractice_CA.Infrastructure.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="CURDPractice_CA.IntegrationTests" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="logs\" />
+	</ItemGroup>
+
 </Project>
