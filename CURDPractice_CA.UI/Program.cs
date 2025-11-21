@@ -36,7 +36,10 @@ else
     app.UseExceptionHandler("/Error");
     app.UseExceptionHandelingMiddleware();
 }
-   
+
+app.UseHsts();
+app.UseHttpsRedirection();
+
 app.UseSerilogRequestLogging();
 
 if (builder.Environment.IsEnvironment("Test") == false)
