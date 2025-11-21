@@ -42,7 +42,7 @@ namespace CURDPractice_CA.UI.Controllers
                 PersonName = registerDto.PersonName
             };
 
-            IdentityResult result =  await _userManager.CreateAsync(user);
+            IdentityResult result =  await _userManager.CreateAsync(user, registerDto.Password);
 
             if(result.Succeeded)
             {
