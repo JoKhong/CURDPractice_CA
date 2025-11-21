@@ -62,5 +62,50 @@ namespace CURDPractice_CA.UI.Controllers
             }
 
         }
+
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            if (ModelState.IsValid == false)
+            {
+                ViewBag.Errors = ModelState.Values.SelectMany(x => x.Errors).Select(y => y.ErrorMessage);
+                return View(loginDto);
+            }
+
+            //TODO: Save user Data Into DB
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = loginDto.Email
+            };
+
+            //IdentityResult result = await _userManager.CreateAsync(user, loginDto.Password);
+
+            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {  
+                return RedirectToAction(nameof(PersonsController.Index), "Persons");
+            }
+            else
+            {  
+                ModelState.AddModelError("Login", "Invalid Email or Password");
+                return View(loginDto);
+            }
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(PersonsController.Index), "Persons");
+        }
+
     }
 }
