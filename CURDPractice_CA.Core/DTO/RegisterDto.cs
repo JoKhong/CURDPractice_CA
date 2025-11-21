@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CURDPractice_CA.Core.Enums;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -31,5 +32,8 @@ namespace CURDPractice_CA.Core.DTO
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password and confirm password must match")]
         public string ConfirmPassword { get; set; }
+
+        public UserTypeOptions UserType {  get; set; } = UserTypeOptions.User;
+
     }
 }
