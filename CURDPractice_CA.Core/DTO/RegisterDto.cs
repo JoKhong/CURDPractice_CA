@@ -10,23 +10,23 @@ namespace CURDPractice_CA.Core.DTO
     public class RegisterDto
     {
         [Required(ErrorMessage = "Name can't be blank")]
-        public string PersonName;
+        public string PersonName { get; set; }
 
         [Required(ErrorMessage = "Email can't be blank")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Email value should be a valid email")]
-        public string Email;
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Phone number can't be blank")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number should only contain numbers")]
-        public string PhoneNumber;
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Password can't be blank")]
         [DataType(DataType.Password)]
-        public string Password;
+        public string Password { get; set; }
 
         [Required(ErrorMessage = "Confirm Password can't be blank")]
         [DataType(DataType.Password)]
-        public string ConfirmPassword;
+        public string ConfirmPassword { get; set; }
     }
 }
