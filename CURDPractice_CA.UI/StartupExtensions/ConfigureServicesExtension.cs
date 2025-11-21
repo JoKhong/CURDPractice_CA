@@ -10,6 +10,7 @@ using ServiceContracts;
 using Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CURD_Practice
 {
@@ -29,6 +30,8 @@ namespace CURD_Practice
                     Value = "X-Global-Value",
                     Order = 0
                 }); // Add in Global Filter
+
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
 
             });
 

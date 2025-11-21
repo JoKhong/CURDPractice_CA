@@ -33,6 +33,7 @@ namespace CURDPractice_CA.UI.Controllers
 
         [Route("[action]")]
         [Authorize("NotAuthenticated")]
+        //[ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
@@ -111,6 +112,7 @@ namespace CURDPractice_CA.UI.Controllers
 
         [Route("[action]")]
         [Authorize("NotAuthenticated")]
+        //[ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto, string? ReturnUrl)
         {
