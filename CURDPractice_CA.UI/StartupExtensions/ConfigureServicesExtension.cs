@@ -1,6 +1,8 @@
 ﻿using CURD_Practice.Filters.ActionFilters;
 using CURDPractice_CA.Core.Domain.IdentityEntities;
 using Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
 using RepositoryContracts;
@@ -30,8 +32,12 @@ namespace CURD_Practice
 
             services.AddHttpClient();
 
-            //Enable Identity
-            services.AddIdentity<ApplicationUser, ApplicationRole>();
+            //Enable Identity in Project
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
+                .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
 
             services.AddHttpLogging(options =>
             {
