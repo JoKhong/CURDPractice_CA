@@ -1,4 +1,5 @@
 ﻿using CURD_Practice.Filters.ActionFilters;
+using CURDPractice_CA.Core.Domain.IdentityEntities;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -13,6 +14,7 @@ namespace CURD_Practice
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment enviroment)
         {
             services.AddTransient<ResponseHeaderActionFilter>();
+            
             services.AddControllersWithViews(options => {
 
                 var logger = services.BuildServiceProvider().GetRequiredService<ILogger<ResponseHeaderActionFilter>>();
@@ -27,6 +29,9 @@ namespace CURD_Practice
             });
 
             services.AddHttpClient();
+
+            //Enable Identity
+            services.AddIdentity<ApplicationUser, ApplicationRole>();
 
             services.AddHttpLogging(options =>
             {
