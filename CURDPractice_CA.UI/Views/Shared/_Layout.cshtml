@@ -27,15 +27,36 @@
                                 @if( User.Identity.IsAuthenticated)
                                 {
                                     <li>
+                                        <i class="fa-solid fa-user"></i>
                                         @User.Identity?.Name
+                                    </li>
+                                    <li>
                                         <a asp-controller="Account" asp-action="Logout">Logout</a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <a asp-controller="Account" asp-action="Register">Register</a>
-                                        <a asp-controller="Account" asp-action="Login">Login</a>
+
+                                        @if (ViewBag.CurrentUrl == "~/Account/Register")
+                                        {
+                                            <a asp-controller="Account" asp-action="Register" class="nav-active">Register</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Account" asp-action="Register">Register</a>
+                                        }
+
+                                        @if (ViewBag.CurrentUrl == "~/Account/Login")
+                                        {
+                                            <a asp-controller="Account" asp-action="Login" class="nav-active">Login</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Account" asp-action="Login">Login</a>
+                                        }
+                                      
+                                        
                                     </li>
                                 }
                             </ul>
@@ -51,8 +72,26 @@
             <div class="navbar mb">
                 <ul>
                     <li>
-                        <a asp-controller="Persons" asp-action="Index">Persons</a>
-                        <a asp-controller="Countries" asp-action="UploadFromExcel">Upload Countries</a>
+
+                        @if (ViewBag.CurrentUrl == "~/Persons/Index")
+                        {
+                            <a asp-controller="Persons" asp-action="Index" class="nav-active">Persons</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Persons" asp-action="Index">Persons</a>
+                        }
+
+                        @if (ViewBag.CurrentUrl == "~/Countries/UploadFromExcel")
+                        {
+                            <a asp-controller="Countries" asp-action="UploadFromExcel" class="nav-active">Upload Countries</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Countries" asp-action="UploadFromExcel">Upload Countries</a>
+                        }
+                        
+                        
                     </li>
                 </ul>
             </div>
