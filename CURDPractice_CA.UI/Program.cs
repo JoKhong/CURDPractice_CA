@@ -46,8 +46,12 @@ if (builder.Environment.IsEnvironment("Test") == false)
 
 app.UseHttpLogging();
 app.UseStaticFiles();
-app.UseRouting();
-app.MapControllers();
+
+//Identity and Security
+app.UseAuthentication(); //Reading and Identify cookie
+
+app.UseRouting(); // Identifying actions medthd based on routed
+app.MapControllers(); // Execute filter pipelines (action + filter)
 
 app.Run();
 

@@ -27,6 +27,7 @@ namespace CURDPractice_CA.Core.DTO
 
         [Required(ErrorMessage = "Confirm Password can't be blank")]
         [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Password and confirm password must match")]
         public string ConfirmPassword { get; set; }
     }
 }
