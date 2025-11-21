@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace CURDPractice_CA.Core.DTO
         [Required(ErrorMessage = "Email can't be blank")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Email value should be a valid email")]
+        [Remote(action: "IsEmailRegistered", controller:"Account", ErrorMessage = "Email already taken")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Phone number can't be blank")]

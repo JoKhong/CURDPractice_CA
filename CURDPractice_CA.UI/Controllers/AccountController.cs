@@ -114,5 +114,19 @@ namespace CURDPractice_CA.UI.Controllers
             return RedirectToAction(nameof(PersonsController.Index), "Persons");
         }
 
+        public async Task<IActionResult> IsEmailRegistered(string email)
+        {
+            ApplicationUser? user =  await _userManager.FindByEmailAsync(email);
+
+            if (user == null) 
+            {
+                return Json(true); // Valid
+            }
+
+            return Json(false);
+
+        }
+
+
     }
 }
