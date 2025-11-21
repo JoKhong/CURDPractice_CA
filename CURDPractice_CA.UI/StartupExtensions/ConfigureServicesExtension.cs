@@ -33,7 +33,14 @@ namespace CURD_Practice
             services.AddHttpClient();
 
             //Enable Identity in Project
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>( option => {
+                option.Password.RequiredLength = 5;
+                option.Password.RequireNonAlphanumeric = true;
+                option.Password.RequireUppercase = true;
+                option.Password.RequireLowercase = true;
+                option.Password.RequireDigit = true;
+                option.Password.RequiredUniqueChars = 3;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
