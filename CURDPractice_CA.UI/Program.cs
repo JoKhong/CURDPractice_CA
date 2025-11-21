@@ -48,9 +48,12 @@ app.UseHttpLogging();
 app.UseStaticFiles();
 
 //Identity and Security
+app.UseRouting(); // Identifying actions medthd based on routed
+
 app.UseAuthentication(); //Reading and Identify cookie
 
-app.UseRouting(); // Identifying actions medthd based on routed
+app.UseAuthorization(); // Validate access permissions 
+
 app.MapControllers(); // Execute filter pipelines (action + filter)
 
 app.Run();

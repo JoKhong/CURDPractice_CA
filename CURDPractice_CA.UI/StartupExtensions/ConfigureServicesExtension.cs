@@ -8,6 +8,8 @@ using Repositories;
 using RepositoryContracts;
 using ServiceContracts;
 using Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CURD_Practice
 {
@@ -30,38 +32,6 @@ namespace CURD_Practice
 
             });
 
-            services.AddHttpClient();
-
-            //Enable Identity in Project
-            services.AddIdentity<ApplicationUser, ApplicationRole>( option => {
-                option.Password.RequiredLength = 5;
-                option.Password.RequireNonAlphanumeric = true;
-                option.Password.RequireUppercase = true;
-                option.Password.RequireLowercase = true;
-                option.Password.RequireDigit = true;
-                option.Password.RequiredUniqueChars = 3;
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders()
-                .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
-                .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
-
-            services.AddHttpLogging(options =>
-            {
-                options.LoggingFields =
-                Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties
-                | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponsePropertiesAndHeaders;
-            });
-
-            if (enviroment.IsEnvironment("Test") == false)
-            {
-                services.AddDbContext<ApplicationDbContext>
-                    (options =>
-                    {
-                        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-                    });
-            }
-
             //Add Auto, ASP.NET covers parameters when add as service
             services.AddScoped<ICountriesRepository, CountriesRepositories>();
             services.AddScoped<IPersonsRepository, PersonsRepositories>();
@@ -82,9 +52,10 @@ namespace CURD_Practice
             services.AddScoped<IPersonsToCSVService, PersonToCSVService>();
             services.AddScoped<IPersonsToExcelService, PersonToExcelService>();
 
+            #region Manual Add Service
             //Add Manual, Useful when constructor has other parameters or want control. 
             //BUT NOT RECOMMENDED
-            #region Manual Add Service
+
             /*
             builder.Services.AddScoped<ICountriesService>(
             provider =>
@@ -102,6 +73,49 @@ namespace CURD_Practice
             });
             */
             #endregion
+
+            services.AddHttpClient();
+
+            if (enviroment.IsEnvironment("Test") == false)
+            {
+                services.AddDbContext<ApplicationDbContext>
+                    (options =>
+                    {
+                        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                    });
+            }
+
+            //Enable Identity in Project
+            services.AddIdentity<ApplicationUser, ApplicationRole>(option => {
+                option.Password.RequiredLength = 5;
+                option.Password.RequireNonAlphanumeric = true;
+                option.Password.RequireUppercase = true;
+                option.Password.RequireLowercase = true;
+                option.Password.RequireDigit = true;
+                option.Password.RequiredUniqueChars = 3;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>()
+                .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>();
+
+            //Authorization Check
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            });
+            services.ConfigureApplicationCookie(options => {
+
+                options.LoginPath = "/Account/Login";
+
+            });
+
+            services.AddHttpLogging(options =>
+            {
+                options.LoggingFields =
+                Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties
+                | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponsePropertiesAndHeaders;
+            });
 
             return services;
 

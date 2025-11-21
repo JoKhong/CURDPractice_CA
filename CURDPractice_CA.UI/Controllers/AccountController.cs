@@ -1,12 +1,14 @@
 ﻿using CURD_Practice.Controllers;
 using CURDPractice_CA.Core.Domain.IdentityEntities;
 using CURDPractice_CA.Core.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CURDPractice_CA.UI.Controllers
 {
     [Route("[controller]")]
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
