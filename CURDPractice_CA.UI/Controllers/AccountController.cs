@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CURDPractice_CA.UI.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     [Route("[controller]")]
     public class AccountController : Controller
     {
@@ -26,6 +26,7 @@ namespace CURDPractice_CA.UI.Controllers
         }
 
         [Route("[action]")]
+        [Authorize("NotAuthenticated")]
         [HttpGet]
         public async Task<IActionResult> Register()
         {
@@ -33,6 +34,7 @@ namespace CURDPractice_CA.UI.Controllers
         }
 
         [Route("[action]")]
+        [Authorize("NotAuthenticated")]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
@@ -102,6 +104,7 @@ namespace CURDPractice_CA.UI.Controllers
         }
 
         [Route("[action]")]
+        [Authorize("NotAuthenticated")]
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -109,6 +112,7 @@ namespace CURDPractice_CA.UI.Controllers
         }
 
         [Route("[action]")]
+        [Authorize("NotAuthenticated")]
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto, string? ReturnUrl)
         {
@@ -159,6 +163,7 @@ namespace CURDPractice_CA.UI.Controllers
         }
 
         [Route("[action]")]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -166,6 +171,7 @@ namespace CURDPractice_CA.UI.Controllers
         }
 
         [Route("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> IsEmailRegistered(string email)
         {
             ApplicationUser? user =  await _userManager.FindByEmailAsync(email);
