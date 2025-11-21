@@ -74,7 +74,7 @@ namespace CURDPractice_CA.UI.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginDto loginDto)
+        public async Task<IActionResult> Login(LoginDto loginDto, string? ReturnUrl)
         {
             if (ModelState.IsValid == false)
             {
@@ -94,6 +94,11 @@ namespace CURDPractice_CA.UI.Controllers
 
             if (result.Succeeded)
             {  
+                if(!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
+                {
+                    return LocalRedirect(ReturnUrl);
+                }
+                
                 return RedirectToAction(nameof(PersonsController.Index), "Persons");
             }
             else
