@@ -128,8 +128,22 @@ namespace CURDPractice_CA.UI.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, isPersistent: false, lockoutOnFailure: false);
 
+            
+
             if (result.Succeeded)
-            {  
+            {
+                ApplicationUser? foundUser = await _userManager.FindByEmailAsync(loginDto.Email);
+
+                if (foundUser != null) 
+                {
+                    if(await _userManager.IsInRoleAsync(foundUser, UserTypeOptions.Admin.ToString()))
+                    {
+                        return RedirectToAction("Index", "Home" , new { area = "admin"});
+                    }
+                    
+                }
+
+
                 if(!string.IsNullOrEmpty(ReturnUrl) && Url.IsLocalUrl(ReturnUrl))
                 {
                     return LocalRedirect(ReturnUrl);
